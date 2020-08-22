@@ -4,6 +4,7 @@ def le_mapa(numero)
     arquivo = "mapa#{numero}.txt"
     texto = File.read(arquivo)
     mapa = texto.split("\n")
+    mapa
 end
 
 
@@ -21,7 +22,7 @@ def encontra_jogador(mapa)
     # não achei!
 end
 
-def calcula_nova_posicao (heroi, direcao)
+def calcula_nova_posicao heroi, direcao
     heroi = heroi.dup
     movimentos = {
         "W" => [-1, 0],
@@ -82,9 +83,27 @@ def posicao_valida? mapa, posicao
     true
 end
 
+def move_fantasma mapa, linha, coluna
+    mapa [linha] [coluna] = " "
+    linha += 0
+    coluna += 1
+    mapa [linha] [coluna] = "F"
+end
 
+
+def move_fantasmas
+    caractere_do_fantasma = "F"
+    mapa.each_with_index do |linha_atual, linha|
+        linha_atual.each_with_index do |caractere_atual, coluna|
+            eh_fantasma = caractere_atual == caractere_do_fantasma
+            if eh_fantasma
+                move_fantasma mapa, linha, coluna
+            end
+
+    end
+end
 def joga(nome)
-    mapa = le_mapa 1
+    mapa = le_mapa 2
     
     while true
         desenha mapa

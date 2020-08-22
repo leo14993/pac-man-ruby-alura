@@ -76,14 +76,7 @@ end
 def copia_mapa mapa
     novo_mapa = []
     mapa.each do | linha |
-        nova_linha = ""
-        linha.each do | caractere |
-            if caractere == "F"
-                nova_linha << " "
-            else
-                nova_linha << caractere
-            end
-        end
+        nova_linha = linha.dup.tr "F", " "
         novo_mapa << nova_linha
     end
     novo_mapa

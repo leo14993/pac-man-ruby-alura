@@ -91,17 +91,18 @@ def move_fantasma mapa, linha, coluna
 end
 
 
-def move_fantasmas
+def move_fantasmas mapa
     caractere_do_fantasma = "F"
     mapa.each_with_index do |linha_atual, linha|
-        linha_atual.each_with_index do |caractere_atual, coluna|
+        linha_atual.chars.each_with_index do |caractere_atual, coluna|
             eh_fantasma = caractere_atual == caractere_do_fantasma
             if eh_fantasma
                 move_fantasma mapa, linha, coluna
             end
-
+        end
     end
 end
+
 def joga(nome)
     mapa = le_mapa 2
     
@@ -117,6 +118,7 @@ def joga(nome)
         end
         mapa[heroi[0]] [heroi[1]] = " "
         mapa[nova_posicao[0]] [nova_posicao[1]] = "H"
+        move_fantasmas mapa
         # mapa[heroi[0]] [heroi[1]] = " "   
     end
 end

@@ -84,10 +84,12 @@ def posicao_valida? mapa, posicao
 end
 
 def move_fantasma mapa, linha, coluna
-    mapa [linha] [coluna] = " "
-    linha += 0
-    coluna += 1
-    mapa [linha] [coluna] = "F"
+    posicao = [linha, coluna + 1]
+    if posicao_valida? mapa, posicao
+        mapa [linha] [coluna] = " "
+        linha += 0
+        mapa [posicao[0]] [posicao[1]] = "F"
+    end
 end
 
 

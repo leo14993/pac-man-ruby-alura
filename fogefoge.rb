@@ -36,38 +36,6 @@ def calcula_nova_posicao heroi, direcao
     heroi
 end
 
-
-# antes
-# def posicao_valida? mapa, nova_posicao
-
-# 0.1
-# --------------------
-#     if nova_posicao[0] < 0
-#         next
-#     end
-#     if nova_posicao[1] < 0 
-#         next
-#     end
-#     if nova_posicao[0] >= mapa.size
-#         next
-#     end
-#     if nova_posicao[1] >= mapa[0].size
-#         next
-#     end
-# ----------------------
-# 0.2
-# ------------------------
-    # if nova_posicao[0] < 0 || nova_posicao[0] >= mapa.size    
-    # if nova_posicao[1] < 0 || nova_posicao[1] >= mapa[0].size
-# -------------------------
-
-
-#     if mapa[nova_posicao[0]] [nova_posicao[1]] =="X"
-#         next
-#     end
-    
-# end
-
 def posicao_valida? mapa, posicao
     linhas = mapa.size
     colunas = mapa[0].size
@@ -84,8 +52,38 @@ def posicao_valida? mapa, posicao
     true
 end
 
+def posicoes_validas_a_partir_de mapa, posicao
+    posicoes = []
+    baixo = [posicao[0] + 1 , posicao[1]]
+    if posicao_valida? mapa, baixo 
+        posicoes << baixo
+    end
+    direita = [posicao[0] , posicao[1] + 1]
+    if posicao_valida? mapa, direita 
+        posicoes << direita
+    end
+    esquerda = [posicao[0] + 1 , posicao[1] - 1]
+    if posicao_valida? mapa, esquerda 
+        posicoes << esquerda
+    end
+    cima = [posicao[0] - 1 , posicao[1]]
+    if posicao_valida? mapa, cima
+        posicoes << cima
+    end
+    posicoes
+end
+
 def move_fantasma mapa, linha, coluna
-    posicao = [linha, coluna + 1]
+    posicoes = posicoes_validas_a_partir_de mapa, [linha, coluna]
+    
+    #mesmo significado
+    return if posicoes.empty?
+    # if posicoes.empty?
+    #     return
+    # end
+    # -------
+
+    posicao = posicoes[0]
     if posicao_valida? mapa, posicao
         mapa [linha] [coluna] = " "
         linha += 0

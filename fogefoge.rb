@@ -19,6 +19,7 @@ def encontra_jogador(mapa)
             # achei!
         end
     end
+    nil
     # não achei!
 end
 
@@ -97,6 +98,11 @@ def move_fantasmas mapa
     novo_mapa
 end
 
+def jogador_perdeu? mapa
+    perdeu = !encontra_jogador(mapa)
+    perdeu
+end
+
 def joga(nome)
     mapa = le_mapa 2
     
@@ -113,7 +119,10 @@ def joga(nome)
         mapa[heroi[0]] [heroi[1]] = " "
         mapa[nova_posicao[0]] [nova_posicao[1]] = "H"
         mapa = move_fantasmas mapa
-        # mapa[heroi[0]] [heroi[1]] = " "   
+        if jogador_perdeu? mapa
+            game_over 
+            break
+        end
     end
 end
 

@@ -80,6 +80,10 @@ def posicao_valida? mapa, posicao
     if mapa[posicao[0]] [posicao[1]] =="X"
         return false
     end
+    if mapa[posicao[0]] [posicao[1]] =="F"
+        return false
+    end
+
     true
 end
 
